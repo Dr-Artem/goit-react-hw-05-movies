@@ -26,7 +26,7 @@ export class Api {
 
     getClickedMovie = async movieId => {
         const response = await fetch(
-            `https://api.themoviedb.org/3/movie/${movieId}/?api_key=${this.API_KEY}`
+            `https://api.themoviedb.org/3/movie/${movieId}?api_key=${this.API_KEY}`
         );
 
         return await this.someFunction(response);
@@ -34,7 +34,7 @@ export class Api {
 
     getClickedMovieActors = async movieId => {
         const response = await fetch(
-            `https://api.themoviedb.org/3/movie/${movieId}/credits/?api_key=${this.API_KEY}`
+            `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${this.API_KEY}`
         );
 
         return await this.someFunction(response);
@@ -42,7 +42,7 @@ export class Api {
 
     getClickedMovieReviews = async movieId => {
         const response = await fetch(
-            `https://api.themoviedb.org/3/movie/${movieId}/reviews/?api_key=${this.API_KEY}`
+            `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${this.API_KEY}`
         );
 
         return await this.someFunction(response);
