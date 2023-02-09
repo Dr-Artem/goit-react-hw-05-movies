@@ -1,10 +1,11 @@
 import { Api } from 'js/Api';
-import { useEffect, useState } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { useEffect, useState, Suspense } from 'react';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
     const { movieId } = useParams();
     const [movieDetail, setMovieDetail] = useState(null);
+    const location = useLocation();
 
     useEffect(() => {
         const variable = new Api();
@@ -13,6 +14,7 @@ export const MovieDetails = () => {
 
     return (
         <div>
+            <Link to={location.state.from}>Go Back</Link>
             <div>
                 {movieDetail && (
                     <div
@@ -26,6 +28,9 @@ export const MovieDetails = () => {
                             <img
                                 src={`https://image.tmdb.org/t/p/w500${movieDetail.poster_path}`}
                                 alt=""
+                                style={{
+                                    maxWidth: '300px',
+                                }}
                             />
                         </div>
                         <div>
@@ -60,15 +65,29 @@ export const MovieDetails = () => {
                     <p>Additional information</p>
                     <ul>
                         <li>
-                            <Link to={'credits'}>cast</Link>
+                            <Link
+                                to={'credits'}
+                                state={{ from: location.state.from }}
+                            >
+                                cast
+                            </Link>
                         </li>
                         <li>
-                            <Link to={'reviews'}>reviews</Link>
+                            <Link
+                                to={'reviews'}
+                                state={{ from: location.state.from }}
+                            >
+                                reviews
+                            </Link>
                         </li>
                     </ul>
                 </div>
             </div>
-            <Outlet />
+            <Suspense>
+                <Outlet />
+            </Suspense>
         </div>
     );
 };
+
+export default MovieDetails;

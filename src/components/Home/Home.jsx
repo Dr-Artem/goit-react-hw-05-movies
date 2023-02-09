@@ -1,7 +1,8 @@
 import { Api } from 'js/Api';
 import { useEffect, useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 export const Home = () => {
+    const location = useLocation();
     const [films, setFilms] = useState([]);
 
     useEffect(() => {
@@ -13,19 +14,36 @@ export const Home = () => {
 
     return (
         <div>
-            <ul>
+            <ul
+                style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    maxWidth: '1280px',
+                    margin: '0 auto',
+                    gap: '50px',
+                    padding: '20px',
+                }}
+            >
                 {films.map(({ title, id }) => {
                     return (
-                        <Link
-                            to={`movies/${id}`}
+                        <li
                             key={id}
                             style={{
-                                display: 'flex',
-                                flexDirection: 'column',
+                                textAlign: 'center',
+                                listStyle: 'none',
+                                fontWeight: 600,
                             }}
                         >
-                            {title}
-                        </Link>
+                            <Link
+                                to={`movies/${id}`}
+                                state={{ from: location }}
+                                style={{
+                                    textDecoration: 'none',
+                                }}
+                            >
+                                {title}
+                            </Link>
+                        </li>
                     );
                 })}
             </ul>

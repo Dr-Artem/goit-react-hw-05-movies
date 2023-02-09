@@ -1,12 +1,21 @@
+import { Suspense } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 export const Layout = () => {
     return (
         <section>
-            <header>
+            <header
+                style={{
+                    display: 'flex',
+                    justifyContent: 'space-evenly',
+                    padding: '20px',
+                }}
+            >
                 <Link to="">Home</Link>
                 <Link to="movies">Movie</Link>
             </header>
-            <Outlet />
+            <Suspense fallback={null}>
+                <Outlet />
+            </Suspense>
         </section>
     );
 };
