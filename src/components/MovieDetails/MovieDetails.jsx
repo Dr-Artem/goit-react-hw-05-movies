@@ -1,5 +1,5 @@
 import { Api } from 'js/Api';
-import { useEffect, useState, Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 
 const MovieDetails = () => {
@@ -78,6 +78,14 @@ const MovieDetails = () => {
                                 state={{ from: location.state.from }}
                             >
                                 reviews
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to={'trailers'}
+                                state={{ from: location.state.from }}
+                            >
+                                trailers
                             </Link>
                         </li>
                     </ul>

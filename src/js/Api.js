@@ -28,7 +28,6 @@ export class Api {
         const response = await fetch(
             `https://api.themoviedb.org/3/movie/${movieId}?api_key=${this.API_KEY}`
         );
-
         return await this.someFunction(response);
     };
 
@@ -43,6 +42,14 @@ export class Api {
     getClickedMovieReviews = async movieId => {
         const response = await fetch(
             `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${this.API_KEY}`
+        );
+
+        return await this.someFunction(response);
+    };
+
+    getClickedMovieTrailer = async movieId => {
+        const response = await fetch(
+            `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${this.API_KEY}`
         );
 
         return await this.someFunction(response);
