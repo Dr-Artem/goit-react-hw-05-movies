@@ -1,109 +1,56 @@
 import axios from 'axios';
 
-export class Api {
-    URL = `https://api.themoviedb.org/3`;
-    API_KEY = '76f6a0e7e680b93f5042387526ec70f2';
-    
-    api = axios.create({
-        baseURL: this.URL,
-        params: {
-            api_key: this.API_KEY,
-            page: 1,
-        },
-    });
-    
-    someFunction = res => {
-        if (!res.ok) {
-            throw new Error(res.status);
-        }
-        return res.json();
-    };
+const URL = `https://api.themoviedb.org/3`;
+const API_KEY = '76f6a0e7e680b93f5042387526ec70f2';
 
+const api = axios.create({
+    baseURL: URL,
+    params: {
+        api_key: API_KEY,
+        page: 1,
+    },
+});
+export class Api {
     getTrendingMovies = async () => {
-        const response = await this.api.get(`/trending/movie/day`)
-        return await this.someFunction(response);
+        const response = await api.get(`/trending/movie/day`);
+        return response.data;
     };
 
     getMovieByName = async inputValue => {
-        const response = await fetch(
-            `https://api.themoviedb.org/3/search/movie?api_key=${this.API_KEY}&query=${inputValue}`
-        );
-
-        return await this.someFunction(response);
+        const response = await api.get(`/search/movie?query=${inputValue}`);
+        return response.data;
     };
 
     getClickedMovie = async movieId => {
-        const response = await fetch(
-            `https://api.themoviedb.org/3/movie/${movieId}?api_key=${this.API_KEY}`
-        );
-        return await this.someFunction(response);
+        const response = await api.get(`/movie/${movieId}`);
+        return response.data;
     };
 
     getClickedMovieActors = async movieId => {
-        const response = await fetch(
-            `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${this.API_KEY}`
-        );
-
-        return await this.someFunction(response);
+        const response = await api.get(`/movie/${movieId}/credits`);
+        return response.data;
     };
 
     getClickedMovieReviews = async movieId => {
-        const response = await fetch(
-            `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${this.API_KEY}`
-        );
-
-        return await this.someFunction(response);
+        const response = await api.get(`/movie/${movieId}/reviews`);
+        return response.data;
     };
 
     getClickedMovieTrailer = async movieId => {
-        const response = await fetch(
-            `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${this.API_KEY}`
-        );
-
-        return await this.someFunction(response);
-    };
-}
-
-
-
-export class Api {
-    fetchTrending = async mediaType => {
-        const response = await api.get(`/trending/${mediaType}/day`);
-        return response.data;
-    };
-
-    fetchByType = async (mediaType, type) => {
-        const response = await api.get(`/${mediaType}/${type}`);
-        return response.data;
-    };
-
-    fetchByName = async (mediaType, inputValue) => {
-        const response = await api.get(`/search/${mediaType}?query=${inputValue}`);
-        return response.data;
-    };
-
-    fetchDetails = async (mediaType, id) => {
-        const response = await api.get(`/${mediaType}/${id}`);
-        return response.data;
-    };
-
-    fetchSimilar = async (mediaType, id) => {
-        const response = await api.get(`/${mediaType}/${id}/similar`);
-        return response.data;
-    };
-
-    fetchCredits = async (mediaType, id) => {
-        const response = await api.get(`/${mediaType}/${id}/credits`);
-        return response.data;
-    };
-
-    fetchReviews = async (mediaType, id) => {
-        const response = await api.get(`/${mediaType}/${id}/reviews`);
-        return response.data;
-    };
-
-    fetchTrailers = async (mediaType, id) => {
-        const response = await api.get(`/${mediaType}/${id}/videos`);
+        const response = await api.get(`/movie/${movieId}/videos`);
         return response.data;
     };
 }
+
+// export class Api {
+
+//     fetchByType = async (mediaType, type) => {
+//         const response = await api.get(`/${mediaType}/${type}`);
+//         return response.data;
+//     };
+
+//     fetchSimilar = async (mediaType, id) => {
+//         const response = await api.get(`/${mediaType}/${id}/similar`);
+//         return response.data;
+//     };
+// }

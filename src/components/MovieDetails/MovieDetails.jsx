@@ -6,6 +6,7 @@ const MovieDetails = () => {
     const { movieId } = useParams();
     const [movieDetail, setMovieDetail] = useState(null);
     const location = useLocation();
+    console.log('refreshed');
 
     useEffect(() => {
         const variable = new Api();
