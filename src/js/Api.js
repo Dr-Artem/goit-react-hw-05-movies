@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export class Api {
     URL = `https://api.themoviedb.org/3`;
-    API_KEY = '2e7c28da08e55a22b5345841376a3e4e';
+    API_KEY = '76f6a0e7e680b93f5042387526ec70f2';
     
     api = axios.create({
         baseURL: this.URL,
